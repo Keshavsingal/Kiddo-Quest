@@ -202,7 +202,6 @@ export default function App() {
     setSelectedAnswer(answer);
     const correct = answer === question?.correctAnswer;
     setIsCorrect(correct);
-    setQuestionCount(q => q + 1);
 
     if (correct) {
       setScore(s => s + 1);
@@ -226,7 +225,9 @@ export default function App() {
   };
 
   const handleNextQuestion = () => {
-    if (questionCount >= QUESTIONS_PER_ROUND) {
+    const newCount = questionCount + 1;
+    setQuestionCount(newCount);
+    if (newCount >= QUESTIONS_PER_ROUND) {
       setView('RESULTS');
       return;
     }
@@ -693,7 +694,7 @@ export default function App() {
                               onClick={handleNextQuestion}
                               className="px-10 py-4 bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-xl font-black rounded-full shadow-xl hover:from-indigo-600 hover:to-purple-600 border-b-4 border-indigo-700 active:border-b-0 active:translate-y-1 transition-all"
                             >
-                              {questionCount >= QUESTIONS_PER_ROUND ? "See Results! 🏆" : "Next Question! 🚀"}
+                              {questionCount + 1 >= QUESTIONS_PER_ROUND ? "See Results! 🏆" : "Next Question! 🚀"}
                             </motion.button>
                           </div>
                         </motion.div>
