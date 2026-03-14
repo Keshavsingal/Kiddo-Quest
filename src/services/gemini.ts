@@ -30,7 +30,7 @@ Include a short, amazing fun fact related to the topic that a child would love t
 Include a brief explanation of why the correct answer is right.`;
 
   const response = await ai.models.generateContent({
-    model: "gemini-2.0-flash",
+    model: "gemini-3.0-flash",
     contents: prompt,
     config: {
       responseMimeType: "application/json",
