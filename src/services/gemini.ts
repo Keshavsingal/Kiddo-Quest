@@ -7,12 +7,15 @@ export interface GeneratedQuestion {
   options: string[];
   correctAnswer: string;
   encouragement: string;
+  hint: string;
+  funFact: string;
+  explanation: string;
 }
 
 export async function generateQuestion(subject: string, topic: string, difficulty: string): Promise<GeneratedQuestion> {
   const prompt = `You are a friendly, encouraging, and enthusiastic teacher for a 5-year-old child.
 Generate a fun, interactive question about ${subject} specifically focusing on ${topic}.
-The difficulty level is: ${difficulty}. 
+The difficulty level is: ${difficulty}.
 - If Easy: Very basic, highly visual, simple concepts (e.g., counting to 5, primary colors, basic shapes).
 - If Medium: Standard kindergarten level (e.g., counting to 10, simple addition +1, sight words).
 - If Hard: A bit more challenging, introducing advanced kindergarten concepts (e.g., counting to 20, addition up to 10, reading short sentences, complex patterns).
@@ -21,10 +24,13 @@ The question should be engaging and easy to understand.
 Do NOT use emojis or excessive symbols in the question text or options. Keep the text clean, clear, and easy to read.
 Provide 2 to 4 multiple choice options.
 Make sure the correct answer is exactly one of the options.
-Keep the text short.`;
+Keep the text short.
+Also provide a helpful hint that nudges toward the answer without giving it away.
+Include a short, amazing fun fact related to the topic that a child would love to learn.
+Include a brief explanation of why the correct answer is right.`;
 
   const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
+    model: "gemini-2.0-flash",
     contents: prompt,
     config: {
       responseMimeType: "application/json",
@@ -38,9 +44,12 @@ Keep the text short.`;
             description: "2 to 4 possible answer options. No emojis."
           },
           correctAnswer: { type: Type.STRING, description: "The exact string from the options array that is the correct answer." },
-          encouragement: { type: Type.STRING, description: "A short, fun encouraging message for when they get it right." }
+          encouragement: { type: Type.STRING, description: "A short, fun encouraging message for when they get it right." },
+          hint: { type: Type.STRING, description: "A helpful hint that nudges toward the correct answer without revealing it. Keep it short and child-friendly." },
+          funFact: { type: Type.STRING, description: "A short, amazing fun fact related to the question topic that a child would love to learn. Start with 'Did you know...' or similar." },
+          explanation: { type: Type.STRING, description: "A brief, child-friendly explanation of why the correct answer is right." }
         },
-        required: ["questionText", "options", "correctAnswer", "encouragement"]
+        required: ["questionText", "options", "correctAnswer", "encouragement", "hint", "funFact", "explanation"]
       },
       temperature: 0.7,
     }

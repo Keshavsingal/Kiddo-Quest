@@ -6,8 +6,103 @@
 }
 
 body {
-  background-color: #f0f9ff;
-  background-image: radial-gradient(#bae6fd 2px, transparent 2px);
-  background-size: 30px 30px;
+  background: linear-gradient(135deg, #e0f2fe 0%, #fce7f3 50%, #ede9fe 100%);
+  background-attachment: fixed;
   font-family: "Nunito", sans-serif;
+  overflow-x: hidden;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-10px) rotate(2deg); }
+  66% { transform: translateY(-5px) rotate(-1deg); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-3deg); }
+  75% { transform: rotate(3deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(99, 102, 241, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.5); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce-in {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.animate-float { animation: float 4s ease-in-out infinite; }
+.animate-wiggle { animation: wiggle 2s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+.animate-sparkle { animation: sparkle 1.5s ease-in-out infinite; }
+.animate-slide-up { animation: slide-up 0.5s ease-out; }
+.animate-bounce-in { animation: bounce-in 0.5s ease-out; }
+
+.decoration-dot {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.15;
+}
+
+.streak-fire {
+  text-shadow: 0 0 10px rgba(251, 146, 60, 0.5);
+}
+
+.hint-box {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border: 3px dashed #f59e0b;
+}
+
+.fun-fact-box {
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+  border: 3px solid #3b82f6;
+}
+
+.results-card {
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7, #d1fae5);
+  border: 4px solid #86efac;
+}
+
+.subject-card-math {
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+}
+
+.subject-card-reading {
+  background: linear-gradient(135deg, #fce7f3, #fbcfe8);
+}
+
+.subject-card-logic {
+  background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+}
+
+.subject-card-science {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+}
+
+.progress-bar-track {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+  border-radius: 999px;
+  transition: width 0.5s ease;
 }
